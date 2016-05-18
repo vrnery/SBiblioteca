@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="padraoInterno.xhtml">
+        <ui:define name="titulo">Biblioteca - Consulta de Livros</ui:define>
+        <ui:define name="conteudo">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel for="txtTitulo" value="Título: "/>
+                    <h:outputText id="txtTitulo" value="#{livroBean.livro.titulo}"/>
+                    <h:outputLabel for="txtPrimeiroNomeAutor" value="Primeiro Nome do Autor: "/>
+                    <h:outputText id="txtPrimeiroNomeAutor" value="#{livroBean.livro.primeiroNomeAutor}"/>
+                    <h:outputLabel for="txtSobrenomeAutor" value="Sobrenome Autor: "/>
+                    <h:outputText id="txtSobrenomeAutor" value="#{livroBean.livro.sobrenomeAutor}"/>
+                    <h:outputLabel for="txtSinopse" value="Sinopse: "/>
+                    <h:outputText id="txtSinopse" value="#{livroBean.livro.sinopse}"/>
+                    <h:outputLabel for="txtAnoPublicacao" value="Ano Publicação: "/>
+                    <h:outputText id="txtAnoPublicacao" value="#{livroBean.livro.anoPublicacao}"/>
+                    <h:outputLabel for="txtEditora" value="Editora: "/>
+                    <h:outputText id="txtEditora" value="#{livroBean.livro.editora}"/>
+                    <h:outputLabel for="chkDoacao" value="É Doação? "/>
+                    <h:selectBooleanCheckbox id="chkDoacao" value="#{livroBean.livro.doacao}" disabled="true"/>
+                </p:panelGrid>
+                <p:button value="Voltar" outcome="cadastroLivros"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

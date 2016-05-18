@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="padraoInterno.xhtml">
+        <ui:define name="titulo">Biblioteca - Cadastro de Usuários</ui:define>
+        <ui:define name="conteudo">
+            <p:messages/>
+            <h:form>
+                <p:commandButton value="Novo Usuário" type="button" onclick="PF('dlgNovoUsuario').show();"/>
+                <p:dataTable value="#{usuarioBean.listaUsuarios}" var="usuario" rows="3" paginator="true">
+                    <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" width="120">
+                        #{usuario.id}
+                    </p:column>
+                    <p:column headerText="Nome" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
+                        #{usuario.nome}
+                    </p:column>
+                    <p:column width="90">
+                        <p:commandButton ajax="false" title="Consultar" icon="ui-icon-search" actionListener="#{usuarioBean.carregar(usuario.id)}" action="consultaUsuarios"/>
+                        <p:commandButton ajax="false" title="Remover" icon="ui-icon-trash" actionListener="#{usuarioBean.remover(usuario)}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+        <ui:define name="dialogos">
+            <p:dialog header="Novo Usuário" widgetVar="dlgNovoUsuario" modal="true">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="txtNome" value="Nome: "/>
+                        <p:inputText id="txtNome" label="Nome" maxlength="100" size="60" value="#{usuarioBean.usuario.nome}" required="true"/>
+                        <p:outputLabel for="txtCPF" value="CPF: "/>
+                        <p:inputMask id="txtCPF" label="CPF" size="12" value="#{usuarioBean.usuario.cpf}" mask="99999999999" required="true"/>
+                        <p:outputLabel for="txtTelefone" value="Telefone: "/>
+                        <p:inputMask id="txtTelefone" label="Telefone" size="25" value="#{usuarioBean.usuario.telefone}" mask="(99) 9999-9999" required="true"/>
+                        <p:outputLabel for="txtEmail" value="E-mail: "/>
+                        <p:inputText id="txtEmail" label="E-mail" maxlength="255" size="60" value="#{usuarioBean.usuario.email}" required="true" validatorMessage="Email inválido!">
+                            <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <p:commandButton ajax="false" value="Salvar" actionListener="#{usuarioBean.salvar()}"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+
+
+
+
+

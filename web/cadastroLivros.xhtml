@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="padraoInterno.xhtml">
+        <ui:define name="titulo">Biblioteca - Cadastro de Livros</ui:define>
+        <ui:define name="conteudo">
+            <p:messages/>
+            <h:form>
+                <p:commandButton value="Novo Livro" type="button" onclick="PF('dlgNovoLivro').show();"/>
+                <p:dataTable value="#{livroBean.listaLivros}" var="livro" rows="3" paginator="true">
+                    <p:column headerText="ID" sortBy="#{livro.id}" filterBy="#{livro.id}" width="120">
+                        #{livro.id}
+                    </p:column>
+                    <p:column headerText="Título" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
+                        #{livro.titulo}
+                    </p:column>
+                    <p:column width="90">
+                        <p:commandButton ajax="false" title="Consultar" icon="ui-icon-search" actionListener="#{livroBean.carregar(livro.id)}" action="consultaLivros"/>
+                        <p:commandButton ajax="false" title="Remover" icon="ui-icon-trash" actionListener="#{livroBean.remover(livro)}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+        <ui:define name="dialogos">
+            <p:dialog header="Novo Livro" widgetVar="dlgNovoLivro" modal="true">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="txtTitulo" value="Título: "/>
+                        <p:inputText id="txtTitulo" label="Título" maxlength="100" size="60" value="#{livroBean.livro.titulo}" required="true"/>
+                        <p:outputLabel for="txtPrimeiroNomeAutor" value="Primeiro Nome do Autor: "/>
+                        <p:inputText id="txtPrimeiroNomeAutor" label="Primeiro Nome do Autor" maxlength="100" size="60" value="#{livroBean.livro.primeiroNomeAutor}" required="true"/>
+                        <p:outputLabel for="txtSobrenomeAutor" value="Sobrenome Autor: "/>
+                        <p:inputText id="txtSobrenomeAutor" label="Sobrenome Autor" maxlength="100" size="60" value="#{livroBean.livro.sobrenomeAutor}" required="true"/>
+                        <p:outputLabel for="txtSinopse" value="Sinopse: "/>
+                        <p:inputTextarea id="txtSinopse" label="Sinopse" cols="60" rows="5" value="#{livroBean.livro.sinopse}"/>
+                        <p:outputLabel for="txtAnoPublicacao" value="Ano Publicação: "/>
+                        <p:inputText id="txtAnoPublicacao" label="Ano Publicação" maxlength="4" size="5" value="#{livroBean.livro.anoPublicacao}"/>
+                        <p:outputLabel for="txtEditora" value="Editora: "/>
+                        <p:inputText id="txtEditora" label="Editora" maxlength="100" size="60" value="#{livroBean.livro.editora}"/>
+                        <p:outputLabel for="chkDoacao" value="É Doação? "/>
+                        <p:selectBooleanCheckbox id="chkDoacao" value="#{livroBean.livro.doacao}"/>
+                    </h:panelGrid>
+                    <p:commandButton ajax="false" value="Salvar" actionListener="#{livroBean.salvar()}"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+
+
+
+
+
