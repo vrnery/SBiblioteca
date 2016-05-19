@@ -1,6 +1,8 @@
 package beans;
 
 
+
+
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.context.internal.ManagedSessionContext;

@@ -3,16 +3,25 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Classe que representa um empréstimo realizado na videolocadora.
  * 
  * @author Leonardo
  */
+@Entity
+@Table
 public class Emprestimo {
+    @Id
+    @GeneratedValue
     private int id;
     private Date data;
     private boolean estahCompleto;
+    @OneToOne(mappedBy = )
     private Cliente cliente;
     private List<ItemDeEmprestimo> itens;
 
